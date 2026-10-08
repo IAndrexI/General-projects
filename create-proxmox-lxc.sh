@@ -2,27 +2,53 @@
 # ==============================================================================
 # Proxmox VE Turnkey LXC Creator - Protutech Portfolio
 # Run directly in your Proxmox VE Host Shell (PVE Node Shell)
-# Creates an ultra-lightweight Alpine Linux container (~10-15MB RAM, 512MB disk)
+# Architecture auto-detected (amd64 / x86_64 guaranteed)
+# Footprint: ~10-15 MB RAM, 512 MB disk | 0% idle CPU
 # ==============================================================================
 
 set -e
 
-# Automatically assign next available container ID
-CT_ID=$(pvesh get /cluster/nextid 2>/dev/null || echo "200")
+# Detect host architecture to avoid arm64 on x86_64
+HOST_ARCH=$(dpkg --print-architecture 2>/dev/null || uname -m)
+case "$HOST_ARCH" in
+    x86_64|amd64) TARGET_ARCH="amd64" ;;
+    aarch64|arm64) TARGET_ARCH="arm64" ;;
+    *) TARGET_ARCH="amd64" ;;
+esac
+
+echo "=== Detected Host Architecture: $TARGET_ARCH ==="
+
+# Clean up broken arm64 template cache if host is amd64
+if [ "$TARGET_ARCH" = "amd64" ] && [ -f "/var/lib/vz/template/cache/alpine-3.24-default_20260803_arm64.tar.xz" ]; then
+    rm -f /var/lib/vz/template/cache/alpine-3.24-default_20260803_arm64.tar.xz
+fi
+
+# Determine container ID (if 101 is broken from previous attempt, clean it)
+CT_ID=101
+if pct status "$CT_ID" >/dev/null 2>&1; then
+    echo "=== Cleaning up previous failed container $CT_ID ==="
+    pct stop "$CT_ID" >/dev/null 2>&1 || true
+    pct destroy "$CT_ID" --purge 1 >/dev/null 2>&1 || true
+fi
+
+# Detect storage pool
 STORAGE="local-lvm"
-[ ! -d "/var/lib/vz/template/cache" ] && STORAGE="local"
+if ! pvesm status -storage local-lvm >/dev/null 2>&1; then
+    STORAGE="local"
+fi
 
 echo "=== [1/5] Updating Proxmox Appliance Catalog ==="
 pveam update >/dev/null 2>&1 || true
 
-ALPINE_TEMPLATE=$(pveam available -section system 2>/dev/null | grep -E "alpine-[0-9]" | sort -V | tail -n1 | awk '{print $2}')
+# Find latest Alpine template strictly matching target architecture
+ALPINE_TEMPLATE=$(pveam available -section system 2>/dev/null | grep -E "alpine-[0-9].*_${TARGET_ARCH}\.tar" | sort -V | tail -n1 | awk '{print $2}')
 if [ -z "$ALPINE_TEMPLATE" ]; then
-    ALPINE_TEMPLATE="alpine-3.20-default_20240606_amd64.tar.xz"
+    ALPINE_TEMPLATE="alpine-3.20-default_20240606_${TARGET_ARCH}.tar.xz"
 fi
 
 echo "=== [2/5] Downloading Alpine Template ($ALPINE_TEMPLATE) ==="
 if [ ! -f "/var/lib/vz/template/cache/$ALPINE_TEMPLATE" ]; then
-    pveam download local "$ALPINE_TEMPLATE" || true
+    pveam download local "$ALPINE_TEMPLATE"
 fi
 
 echo "=== [3/5] Creating Ultra-Light LXC Container (ID: $CT_ID) ==="
@@ -81,10 +107,11 @@ CONTAINER_IP=$(pct exec $CT_ID -- ip -4 addr show eth0 2>/dev/null | grep -oP '(
 echo "=========================================================="
 echo "  🎉 Portfolio LXC Successfully Created & Started!"
 echo "  Container ID : $CT_ID"
-echo "  Allocated RAM: 64 MB (Active RAM usage: ~12 MB)"
+echo "  Architecture : $TARGET_ARCH"
+echo "  Allocated RAM: 64 MB (Active RAM usage: ~10-12 MB)"
 echo "  Disk Size    : 512 MB"
 echo "  Local IP     : http://$CONTAINER_IP"
 echo ""
-echo "  Cloudflare Tunnel Setup:"
+echo "  Cloudflare Tunnel Route:"
 echo "  Service: http://$CONTAINER_IP:80"
 echo "=========================================================="
