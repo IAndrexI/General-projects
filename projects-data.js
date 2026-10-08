@@ -439,11 +439,12 @@ window.PORTFOLIO_DATA = {
       liveUrl: null,
       githubUrl: "https://github.com/IAndrexI/General-projects",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Flexbox & Grid"],
-      shortDesc: "Foundational web development archive showcasing progression from pure HTML/CSS prototypes to interactive full-stack tools.",
-      longDesc: "The initial portfolio repository documenting early explorations into semantic HTML, responsive design, interactive JavaScript calculators, and UI layouts that paved the way for current production systems.",
+      shortDesc: "Foundational web development archive showcasing early responsive design layouts, flexbox grids, and modal interactions preserved alongside current production systems.",
+      longDesc: "The initial web development repository documenting early explorations into semantic HTML5, responsive CSS media queries, and interactive DOM manipulation (including the California/SJ travel layout prototype and modal handlers preserved in archive/practice-page/) that paved the way for current production systems.",
       resumeBullets: [
         "Crafted semantic, mobile-first responsive prototypes utilizing vanilla HTML5 and modern CSS3.",
-        "Practiced clean DOM manipulation and accessibility fundamentals."
+        "Engineered flexbox/grid layout systems with breakpoint media queries and DOM modal controllers.",
+        "Preserved original practice foundations alongside modern self-hosted web applications."
       ],
       mockupType: "general"
     }
