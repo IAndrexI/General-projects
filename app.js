@@ -1,6 +1,7 @@
 /**
  * ANDREW PORTFOLIO - APPLICATION SCRIPT
- * Apple-style animations, dynamic screenshot generation, filtering & modal interactions
+ * Simplistic Animated Starry Night Background, Apple-Style Tab Navigation,
+ * Dynamic Screenshot Mockup Generator & Modal Card Expansions
  */
 
 (function () {
@@ -17,6 +18,8 @@
 
   // DOM Elements
   const elements = {
+    canvas: document.getElementById('starry-canvas'),
+    navTabs: document.getElementById('main-nav-tabs'),
     featuredContainer: document.getElementById('featured-cards-container'),
     projectsGrid: document.getElementById('projects-grid'),
     searchInput: document.getElementById('project-search'),
@@ -29,6 +32,146 @@
     modalBody: document.getElementById('modal-detail-body'),
     resumeModal: document.getElementById('resume-modal')
   };
+
+  /* --------------------------------------------------------------------------
+     SIMPLISTIC ANIMATED STARRY NIGHT ENGINE
+     Twinkling micro-stars with gentle depth parallax and shooting meteors
+     -------------------------------------------------------------------------- */
+  class StarryNightEngine {
+    constructor(canvas) {
+      if (!canvas) return;
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d');
+      this.stars = [];
+      this.meteors = [];
+      this.numStars = 140;
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.lastMeteorTime = Date.now();
+      this.meteorInterval = 4500; // Meteor every 4.5s
+      this.scrollY = window.scrollY;
+
+      this.resize = this.resize.bind(this);
+      this.animate = this.animate.bind(this);
+
+      this.init();
+    }
+
+    init() {
+      this.resize();
+      window.addEventListener('resize', this.resize);
+      window.addEventListener('scroll', () => {
+        this.scrollY = window.scrollY;
+      }, { passive: true });
+
+      // Generate stars with coordinates and twinkle frequencies
+      this.stars = [];
+      for (let i = 0; i < this.numStars; i++) {
+        this.stars.push({
+          x: Math.random() * this.width,
+          y: Math.random() * this.height,
+          radius: Math.random() * 1.3 + 0.4,
+          baseAlpha: Math.random() * 0.6 + 0.2,
+          twinkleSpeed: Math.random() * 0.02 + 0.005,
+          twinklePhase: Math.random() * Math.PI * 2,
+          depth: Math.random() * 0.4 + 0.1, // Parallax depth layer
+          color: Math.random() > 0.8 ? '#00f2fe' : (Math.random() > 0.6 ? '#c084fc' : '#ffffff')
+        });
+      }
+
+      requestAnimationFrame(this.animate);
+    }
+
+    resize() {
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      this.canvas.width = this.width;
+      this.canvas.height = this.height;
+    }
+
+    createMeteor() {
+      // Create shooting star starting from top/right quadrant
+      const startX = Math.random() * (this.width * 0.8) + (this.width * 0.1);
+      const startY = Math.random() * (this.height * 0.35);
+      const length = Math.random() * 100 + 80;
+      const speed = Math.random() * 8 + 10;
+      const angle = (215 + (Math.random() * 15 - 7.5)) * (Math.PI / 180); // ~215 degrees
+
+      this.meteors.push({
+        x: startX,
+        y: startY,
+        dx: Math.cos(angle) * speed,
+        dy: -Math.sin(angle) * speed,
+        length: length,
+        alpha: 1.0,
+        decay: Math.random() * 0.015 + 0.015
+      });
+    }
+
+    animate() {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+
+      // Check if light mode is active to reduce star opacity
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const globalOpacityMultiplier = isLight ? 0.35 : 1.0;
+
+      // 1. Draw & Twinkle Stars
+      const time = Date.now();
+      for (let i = 0; i < this.stars.length; i++) {
+        const s = this.stars[i];
+        s.twinklePhase += s.twinkleSpeed;
+        const alpha = Math.max(0.1, Math.min(1.0, s.baseAlpha + Math.sin(s.twinklePhase) * 0.3)) * globalOpacityMultiplier;
+
+        // Subtle scroll parallax
+        const displayY = (s.y - (this.scrollY * s.depth * 0.15)) % this.height;
+        const normalizedY = displayY < 0 ? displayY + this.height : displayY;
+
+        this.ctx.beginPath();
+        this.ctx.arc(s.x, normalizedY, s.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = s.color;
+        this.ctx.globalAlpha = alpha;
+        this.ctx.fill();
+      }
+
+      // 2. Trigger Periodic Meteors
+      if (!isLight && time - this.lastMeteorTime > this.meteorInterval) {
+        this.createMeteor();
+        this.lastMeteorTime = time + (Math.random() * 2000 - 1000); // jitter
+      }
+
+      // 3. Draw & Update Meteors
+      for (let i = this.meteors.length - 1; i >= 0; i--) {
+        const m = this.meteors[i];
+        m.x += m.dx;
+        m.y += m.dy;
+        m.alpha -= m.decay;
+
+        if (m.alpha <= 0 || m.x < 0 || m.y > this.height) {
+          this.meteors.splice(i, 1);
+          continue;
+        }
+
+        const tailX = m.x - (m.dx / 12) * m.length;
+        const tailY = m.y - (m.dy / 12) * m.length;
+
+        const grad = this.ctx.createLinearGradient(m.x, m.y, tailX, tailY);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${m.alpha * 0.9})`);
+        grad.addColorStop(0.3, `rgba(0, 242, 254, ${m.alpha * 0.6})`);
+        grad.addColorStop(1, 'rgba(0, 242, 254, 0)');
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(m.x, m.y);
+        this.ctx.lineTo(tailX, tailY);
+        this.ctx.strokeStyle = grad;
+        this.ctx.lineWidth = 1.8;
+        this.ctx.globalAlpha = m.alpha;
+        this.ctx.stroke();
+      }
+
+      this.ctx.globalAlpha = 1.0;
+      requestAnimationFrame(this.animate);
+    }
+  }
 
   /* --------------------------------------------------------------------------
      Mini Screenshot & Application Mockup Generator
@@ -123,10 +266,8 @@
             <div class="radar-bombsite bombsite-a">A</div>
             <div class="radar-bombsite bombsite-b">B</div>
             <svg class="nade-arc-svg" viewBox="0 0 300 150">
-              <!-- Smoke curve from T-Roof to Window -->
               <path d="M 40,120 Q 140,20 220,50" fill="none" stroke="#00f2fe" stroke-width="2.5" stroke-dasharray="4,3" />
               <circle cx="220" cy="50" r="5" fill="#00f2fe" opacity="0.8" />
-              <!-- Flash curve to Catwalk -->
               <path d="M 60,110 Q 110,40 160,80" fill="none" stroke="#f59e0b" stroke-width="2" />
               <circle cx="160" cy="80" r="4" fill="#f59e0b" />
             </svg>
@@ -153,7 +294,7 @@
             <div class="discord-presence-box">
               <div class="presence-img">Px</div>
               <div style="line-height: 1.3;">
-                <div style="font-weight: 700; color: #ffffff;">Playing Proxmox VE 8.4</div>
+                <div style="font-weight: 700; color: #ffffff;">Playing Proxmox VE 9.2.11</div>
                 <div style="color: #94a3b8;">Node: pve • Uptime: 99.98%</div>
                 <div style="color: #00f2fe;">06:14:28 elapsed</div>
               </div>
@@ -664,10 +805,8 @@
 
     if (elements.themeIcon) {
       if (theme === 'light') {
-        // Show moon icon for light mode
         elements.themeIcon.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
       } else {
-        // Show sun icon for dark mode
         elements.themeIcon.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
       }
     }
@@ -676,6 +815,36 @@
   function toggleLightDarkMode() {
     const nextTheme = state.currentTheme === 'light' ? 'dark' : 'light';
     applyTheme(nextTheme, state.currentPalette);
+  }
+
+  /* --------------------------------------------------------------------------
+     Tab Navigation Active Tracking
+     -------------------------------------------------------------------------- */
+  function initTabScrollTracking() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            if (link.getAttribute('data-tab') === id) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-80px 0px -50% 0px'
+    });
+
+    sections.forEach(sec => observer.observe(sec));
   }
 
   /* --------------------------------------------------------------------------
@@ -709,15 +878,19 @@
      Event Listeners & Setup
      -------------------------------------------------------------------------- */
   function init() {
-    // Apply initial theme
+    // 1. Initialize Starry Night Background
+    new StarryNightEngine(elements.canvas);
+
+    // 2. Apply initial theme & palette
     applyTheme(state.currentTheme, state.currentPalette);
 
-    // Initial renders
+    // 3. Initial renders
     renderFeaturedCards();
     renderProjectsGallery();
     initScrollObservers();
+    initTabScrollTracking();
 
-    // Theme controls
+    // 4. Theme controls
     if (elements.paletteSelect) {
       elements.paletteSelect.addEventListener('change', (e) => {
         applyTheme(state.currentTheme, e.target.value);
@@ -728,7 +901,7 @@
       elements.themeToggleBtn.addEventListener('click', toggleLightDarkMode);
     }
 
-    // Category pills filter
+    // 5. Category filter pills
     if (elements.categoryPills) {
       elements.categoryPills.addEventListener('click', (e) => {
         const btn = e.target.closest('.category-pill');
@@ -742,7 +915,7 @@
       });
     }
 
-    // Search input
+    // 6. Search input
     if (elements.searchInput) {
       elements.searchInput.addEventListener('input', (e) => {
         state.searchQuery = e.target.value;
@@ -750,9 +923,8 @@
       });
     }
 
-    // Keyboard shortcuts
+    // 7. Keyboard shortcuts
     window.addEventListener('keydown', (e) => {
-      // Shortcut '/' or 'Ctrl+K' to focus search
       if ((e.key === '/' || (e.ctrlKey && e.key === 'k')) && document.activeElement !== elements.searchInput) {
         e.preventDefault();
         if (elements.searchInput) {
@@ -761,13 +933,12 @@
         }
       }
 
-      // Escape to close active modal
       if (e.key === 'Escape') {
         closeModal();
       }
     });
 
-    // Close modal on backdrop click
+    // 8. Close modal on backdrop click
     if (elements.detailModal) {
       elements.detailModal.addEventListener('click', (e) => {
         if (e.target === elements.detailModal) closeModal();

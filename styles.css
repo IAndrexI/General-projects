@@ -1,6 +1,7 @@
 /* ==========================================================================
    ANDREW PORTFOLIO - APPLE-INSPIRED DESIGN SYSTEM & STYLESHEET
    Theming synchronized with Protutech Suite & Obsidian Neon Color Palette
+   Simplified navigation tabs & animated simplistic starry night background
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -8,18 +9,18 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Default: Protutech Obsidian Neon */
-  --bg-app: #080c16;
+  --bg-app: #060913;
   --bg-surface: #0d1322;
-  --bg-card: rgba(18, 26, 45, 0.75);
-  --bg-card-hover: rgba(24, 34, 59, 0.9);
-  --bg-card-solid: #121a2d;
-  --bg-input: #090e1a;
-  --bg-modal: #0f1628;
+  --bg-card: rgba(14, 21, 37, 0.72);
+  --bg-card-hover: rgba(20, 30, 52, 0.88);
+  --bg-card-solid: #0f172a;
+  --bg-input: #080d1a;
+  --bg-modal: #0c1222;
   --bg-pill: rgba(255, 255, 255, 0.06);
-  --bg-pill-active: rgba(0, 242, 254, 0.15);
+  --bg-pill-active: rgba(0, 242, 254, 0.16);
   
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.12);
+  --border-card: rgba(255, 255, 255, 0.11);
   --border-glow: rgba(0, 242, 254, 0.45);
   --border-active: #00f2fe;
 
@@ -48,13 +49,13 @@
   --radius-xl: 32px;
   --radius-pill: 9999px;
 
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  --shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 20px var(--accent-glow);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-hover: 0 20px 45px -12px rgba(0, 0, 0, 0.75), 0 0 25px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   --shadow-glow: 0 0 35px var(--accent-glow);
-  --shadow-modal: 0 30px 80px rgba(0, 0, 0, 0.85);
+  --shadow-modal: 0 35px 85px rgba(0, 0, 0, 0.9);
 
   --nav-height: 64px;
-  --container-max: 1280px;
+  --container-max: 1240px;
 
   --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,13 +64,13 @@
 
 /* Palette Variations */
 [data-palette="adobe-classic"] {
-  --bg-app: #18181b;
-  --bg-surface: #202024;
-  --bg-card: rgba(39, 39, 42, 0.75);
-  --bg-card-hover: rgba(50, 50, 56, 0.9);
-  --bg-card-solid: #27272a;
-  --bg-input: #141416;
-  --bg-modal: #222226;
+  --bg-app: #121214;
+  --bg-surface: #1c1c20;
+  --bg-card: rgba(34, 34, 38, 0.72);
+  --bg-card-hover: rgba(45, 45, 52, 0.88);
+  --bg-card-solid: #222226;
+  --bg-input: #101013;
+  --bg-modal: #1c1c20;
   --accent-primary: #38bdf8;
   --accent-secondary: #818cf8;
   --accent-gradient: linear-gradient(135deg, #38bdf8, #818cf8);
@@ -78,13 +79,13 @@
 }
 
 [data-palette="cyber-emerald"] {
-  --bg-app: #05100e;
-  --bg-surface: #091a17;
-  --bg-card: rgba(15, 40, 36, 0.75);
-  --bg-card-hover: rgba(21, 56, 50, 0.9);
-  --bg-card-solid: #0f2824;
-  --bg-input: #040b09;
-  --bg-modal: #0d211d;
+  --bg-app: #040d0b;
+  --bg-surface: #081714;
+  --bg-card: rgba(12, 33, 29, 0.72);
+  --bg-card-hover: rgba(18, 48, 42, 0.88);
+  --bg-card-solid: #0d231f;
+  --bg-input: #030a08;
+  --bg-modal: #0a1c19;
   --accent-primary: #10b981;
   --accent-secondary: #06b6d4;
   --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4);
@@ -93,13 +94,13 @@
 }
 
 [data-palette="sunset-ember"] {
-  --bg-app: #120910;
-  --bg-surface: #1d0f1a;
-  --bg-card: rgba(41, 21, 37, 0.75);
-  --bg-card-hover: rgba(56, 28, 50, 0.9);
-  --bg-card-solid: #291525;
-  --bg-input: #0e050c;
-  --bg-modal: #1f111c;
+  --bg-app: #0f070d;
+  --bg-surface: #1a0d17;
+  --bg-card: rgba(34, 17, 30, 0.72);
+  --bg-card-hover: rgba(48, 24, 43, 0.88);
+  --bg-card-solid: #22111f;
+  --bg-input: #0c050a;
+  --bg-modal: #180c16;
   --accent-primary: #f59e0b;
   --accent-secondary: #f43f5e;
   --accent-gradient: linear-gradient(135deg, #f59e0b, #f43f5e);
@@ -165,7 +166,20 @@ body {
   transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
-/* Ambient Background Light Orbs */
+/* --------------------------------------------------------------------------
+   Animated Starry Night Canvas Background
+   -------------------------------------------------------------------------- */
+#starry-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient Cosmic Background Nebulae */
 .ambient-bg {
   position: fixed;
   top: 0;
@@ -180,33 +194,33 @@ body {
 .ambient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.25;
+  filter: blur(140px);
+  opacity: 0.22;
   transition: all 1s ease;
 }
 
 .ambient-orb-1 {
-  top: -10%;
+  top: -12%;
   right: 15%;
-  width: 600px;
-  height: 600px;
+  width: 650px;
+  height: 650px;
   background: var(--accent-primary);
 }
 
 .ambient-orb-2 {
-  top: 40%;
-  left: -10%;
-  width: 500px;
-  height: 500px;
+  top: 35%;
+  left: -12%;
+  width: 550px;
+  height: 550px;
   background: var(--accent-secondary);
-  opacity: 0.2;
+  opacity: 0.18;
 }
 
 .ambient-orb-3 {
   bottom: -15%;
   right: -5%;
-  width: 650px;
-  height: 650px;
+  width: 700px;
+  height: 700px;
   background: var(--accent-primary);
   opacity: 0.15;
 }
@@ -221,8 +235,13 @@ body {
   z-index: 1;
 }
 
+/* Section scroll margin for smooth navbar offset */
+section {
+  scroll-margin-top: 90px;
+}
+
 /* --------------------------------------------------------------------------
-   Apple-Style Floating Glass Navbar (Dynamic Island Aesthetic)
+   Apple-Style Simple Glass Navbar with Tabs
    -------------------------------------------------------------------------- */
 .navbar-wrapper {
   position: fixed;
@@ -240,20 +259,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 8px 14px 8px 18px;
-  background: rgba(13, 19, 34, 0.72);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  gap: 20px;
+  padding: 7px 14px 7px 18px;
+  background: rgba(10, 16, 30, 0.75);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-pill);
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: all var(--transition-smooth);
   max-width: 95%;
 }
 
 [data-theme="light"] .navbar {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -280,33 +299,52 @@ body {
 }
 
 .nav-logo-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   color: #ffffff;
 }
 
+/* Simple Navigation Tabs */
 .nav-links {
   display: flex;
   align-items: center;
   gap: 4px;
   list-style: none;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
+  padding: 6px 14px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-pill);
   transition: all var(--transition-fast);
+  cursor: pointer;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover {
   color: var(--text-primary);
   background: var(--bg-pill);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .nav-link.active {
+  background: #ffffff;
+  color: #1d1d1f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .nav-actions {
@@ -514,12 +552,13 @@ body {
   gap: 14px;
   text-align: left;
   transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-card);
 }
 
 .stat-card:hover {
   border-color: var(--border-glow);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-hover);
 }
 
 .stat-icon {
@@ -554,7 +593,7 @@ body {
    Apple Scroll-Expand Showcase Section
    -------------------------------------------------------------------------- */
 .showcase-section {
-  padding: 50px 0 80px;
+  padding: 60px 0 80px;
 }
 
 .section-header {
@@ -855,9 +894,7 @@ body {
   background: #f1f5f9;
 }
 
-/* Specific Mini Screenshot UI Styles */
-
-/* 1. ProtutechDash Periodic Table Mockup */
+/* Mockup Elements */
 .mock-periodic-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -905,7 +942,6 @@ body {
   align-self: flex-end;
 }
 
-/* 2. Proxmox VE Mockup */
 .mock-proxmox-layout {
   display: grid;
   grid-template-columns: 80px 1fr;
@@ -981,7 +1017,6 @@ body {
 .fill-blue { background: linear-gradient(90deg, #0284c7, #38bdf8); }
 .fill-emerald { background: linear-gradient(90deg, #059669, #10b981); }
 
-/* 3. CS2 Nades Tactical Mockup */
 .mock-cs2-radar {
   height: 100%;
   background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
@@ -989,11 +1024,6 @@ body {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.radar-grid-line {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .radar-bombsite {
@@ -1021,7 +1051,6 @@ body {
   height: 100%;
 }
 
-/* 4. Discord RPC Mockup */
 .mock-discord-card {
   background: #1e1f22;
   border-radius: 8px;
@@ -1086,7 +1115,6 @@ body {
   font-weight: 700;
 }
 
-/* Generic Fallback Mockup View */
 .mock-generic-dashboard {
   height: 100%;
   display: flex;
@@ -1263,6 +1291,7 @@ body {
   transition: all var(--transition-smooth);
   cursor: pointer;
   position: relative;
+  box-shadow: var(--shadow-card);
 }
 
 .project-card:hover {
@@ -1564,6 +1593,8 @@ body {
   margin-top: 80px;
   background: rgba(0, 0, 0, 0.2);
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-brand {
@@ -1658,7 +1689,7 @@ body {
     color: #000000 !important;
   }
 
-  .navbar-wrapper, .ambient-bg, .footer, .hero-cta-group, .filter-search-bar, .modal-close-btn {
+  #starry-canvas, .navbar-wrapper, .ambient-bg, .footer, .hero-cta-group, .filter-search-bar, .modal-close-btn {
     display: none !important;
   }
 

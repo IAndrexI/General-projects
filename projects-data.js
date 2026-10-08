@@ -21,7 +21,7 @@ window.PORTFOLIO_DATA = {
       { label: "Architecture", value: "100% Self-Hosted", icon: "shield" }
     ],
     skills: {
-      "Virtualization & Homelab": ["Proxmox VE 8.4", "LXC Containers", "KVM Virtualization", "ZFS Storage", "Portainer", "Docker"],
+      "Virtualization & Homelab": ["Proxmox VE 9.2.11", "LXC Containers", "KVM Virtualization", "ZFS Storage", "Portainer", "Docker"],
       "Networking & Security": ["Cloudflare Argo Tunnels", "AdGuard Home DNS", "Vaultwarden (Bitwarden)", "Reverse Proxy", "SSL/TLS", "Tailscale / WireGuard"],
       "Software & Full-Stack": ["JavaScript (ESNext)", "TypeScript", "Python 3", "Vue.js", "Node.js", "HTML5 & Modern CSS3", "REST APIs", "WebSockets"],
       "Automation & OS": ["Background Daemons (RPC)", "PowerShell", "Bash / Shell", "Discord Bot SDK", "Soulseek Automation", "GitHub Actions CI/CD"],
@@ -63,11 +63,11 @@ window.PORTFOLIO_DATA = {
       date: "2025 - Present",
       liveUrl: "https://proxmox.protutech.vip",
       githubUrl: "https://github.com/IAndrexI",
-      tech: ["Proxmox VE 8.4", "Debian Linux", "LXC Containers", "ZFS Storage", "Cloudflare Zero Trust", "GPU Passthrough"],
+      tech: ["Proxmox VE 9.2.11", "Debian Linux", "LXC Containers", "ZFS Storage", "Cloudflare Zero Trust", "GPU Passthrough"],
       shortDesc: "Bare-metal hypervisor node hosting all enterprise homelab microservices, LXC containers, automated ZFS snapshots, and secure remote ingress.",
       longDesc: "The core computational backbone for all Protutech services. Configured with hardened unprivileged LXC containers running individual isolated workloads (Navidrome, Seafile, Pelican, Vaultwarden, DiscoPanel). Utilizes Cloudflare Argo Tunnels for zero open inbound firewall ports, automated offsite snapshots, and hardware acceleration for media decoding and AI inference.",
       resumeBullets: [
-        "Configured and hardened bare-metal Proxmox VE 8.4 environment orchestrating 10+ isolated LXC microservices with sub-1% idle overhead.",
+        "Configured and hardened bare-metal Proxmox VE 9.2.11 environment orchestrating 10+ isolated LXC microservices with sub-1% idle overhead.",
         "Engineered zero-trust remote ingress using Cloudflare Tunnels and reverse proxy routing, eliminating exposed public ports.",
         "Configured ZFS pooled storage with automated atomic snapshot schedules and multi-container shared mountpoints (`mp0`).",
         "Achieved 99.98% cluster availability with automated systemd watchdog recovery and resource quotas."

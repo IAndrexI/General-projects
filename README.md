@@ -27,7 +27,7 @@ Designed specifically for **resume presentation**, recruiter walkthroughs, and e
    - **Sunset Ember:** Warm Midnight (`#120910`), Amber (`#f59e0b`), and Rose (`#f43f5e`).
    - Full **Light / Dark Mode** toggle with instant `localStorage` persistence.
 4. **Complete Project Catalog (20 Projects):**
-   - **Proxmox & Homelab (9 Services):** Proxmox VE 8.4, Pelican Panel, ProtutechDash, Seafile Cloud, Vaultwarden, Homebox, Direct Files, Mail Gateway, Navidrome & slskd.
+   - **Proxmox & Homelab (9 Services):** Proxmox VE 9.2.11, Pelican Panel, ProtutechDash, Seafile Cloud, Vaultwarden, Homebox, Direct Files, Mail Gateway, Navidrome & slskd.
    - **Open Source & GitHub (11 Projects):** proxDiscord, CS2Nades, DNSfilters, aiVault, windowsDesktopDisableBind, Voron2.4, dropsClaim, SC audio server, discordapi, habitica, General-projects.
 5. **Resume Ready & Printable:**
    - Built-in **Resume View** with technical competency matrix, quantifiable impact metrics, and clean typography.
