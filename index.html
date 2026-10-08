@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrew — Systems, Automation & Full-Stack Engineer | Portfolio</title>
-  <meta name="description" content="Portfolio of Andrew (IAndrexI) — Homelab Architect, Systems Engineer, and Full-Stack Developer. Featuring self-hosted Proxmox infrastructure, automation daemons, and open-source applications.">
+  <title>Andrew — Systems, Automation & Software Engineer</title>
+  <meta name="description" content="Portfolio of Andrew (@IAndrexI) — Self-hosted Proxmox VE infrastructure, Protutech homelab ecosystem, automation daemons, and open-source software engineering.">
   <link rel="icon" type="image/svg+xml" href="assets/protutech-logo.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Ambient Background Lighting -->
+  <!-- ====================================================================
+       ANIMATED STAR LIGHT & METEOR CANVAS (Starry Night Background)
+       ==================================================================== -->
+  <canvas id="starry-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Glow Nebulae -->
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-orb ambient-orb-1"></div>
     <div class="ambient-orb ambient-orb-2"></div>
@@ -18,11 +23,11 @@
   </div>
 
   <!-- ====================================================================
-       APPLE-STYLE DYNAMIC ISLAND GLASS NAVBAR
+       APPLE-STYLE SIMPLE GLASS NAVBAR WITH TABS
        ==================================================================== -->
   <div class="navbar-wrapper">
     <nav class="navbar" aria-label="Main Navigation">
-      <a href="#hero" class="nav-brand">
+      <a href="#home" class="nav-brand">
         <div class="nav-logo-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -33,12 +38,13 @@
         <span>Andrew</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#featured" class="nav-link">Highlights</a></li>
-        <li><a href="#projects" class="nav-link">All Projects</a></li>
-        <li><a href="#skills" class="nav-link">Architecture & Skills</a></li>
-        <li><a href="https://proxmox.protutech.vip" target="_blank" rel="noopener noreferrer" class="nav-link">Proxmox</a></li>
-        <li><a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a></li>
+      <!-- Simple Navigation Tabs -->
+      <ul class="nav-links" id="main-nav-tabs">
+        <li><a href="#home" class="nav-link active" data-tab="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-tab="about">About</a></li>
+        <li><a href="#projects" class="nav-link" data-tab="projects">Projects</a></li>
+        <li><a href="#skills" class="nav-link" data-tab="skills">Skills</a></li>
+        <li><a href="#contact" class="nav-link" data-tab="contact">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -59,7 +65,7 @@
 
         <!-- Resume Pill CTA -->
         <button class="btn-pill-primary" onclick="window.PortfolioApp.openResumeModal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
           <span>Resume</span>
         </button>
       </div>
@@ -68,9 +74,9 @@
 
   <main>
     <!-- ====================================================================
-         HERO SECTION (Apple Keynote Style)
+         SECTION 1: HOME / HERO (Apple Minimal + Starry Sky)
          ==================================================================== -->
-    <section class="hero-section" id="hero">
+    <section class="hero-section" id="home">
       <div class="container">
         <div class="hero-eyebrow">
           <span class="hero-eyebrow-dot"></span>
@@ -86,14 +92,14 @@
         </p>
 
         <div class="hero-cta-group">
-          <button class="btn-hero-primary" onclick="window.PortfolioApp.openResumeModal()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-            <span>View Resume & Credentials</span>
-          </button>
-          <a href="#featured" class="btn-hero-secondary">
-            <span>Explore Keynote Highlights</span>
+          <a href="#projects" class="btn-hero-primary">
+            <span>Explore Projects</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </a>
+          <button class="btn-hero-secondary" onclick="window.PortfolioApp.openResumeModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>View Resume</span>
+          </button>
           <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
             <span>GitHub Profile</span>
@@ -146,34 +152,95 @@
     </section>
 
     <!-- ====================================================================
-         KEYNOTE HIGHLIGHTS (Apple Scroll-Expand Bento Cards)
+         SECTION 2: ABOUT (Similar to Eric David style + Systems Focus)
          ==================================================================== -->
-    <section class="showcase-section" id="featured">
+    <section class="showcase-section" id="about">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">Keynote Highlights</span>
-          <h2 class="section-title">Designed with intent. Built to perform.</h2>
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Systems Architect & Developer</h2>
           <p class="section-desc">
-            Flagship projects combining hypervisor engineering, real-time RPC daemons, interactive client interfaces, and zero-trust edge routing.
+            Bridging hardware infrastructure, Linux systems engineering, and modern full-stack web software.
           </p>
         </div>
 
-        <div class="bento-featured-grid" id="featured-cards-container">
-          <!-- Dynamically populated by app.js -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: start;">
+          <div class="about-card" style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 32px; backdrop-filter: blur(24px);">
+            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);">
+              Building Reliable, Sovereign Technology
+            </h3>
+            <p style="font-size: 0.96rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+              I specialize in designing and managing resilient, self-hosted infrastructure. From provisioning bare-metal <strong>Proxmox VE 8.4</strong> hypervisors with automated ZFS storage pools to writing background <strong>Python RPC daemons</strong> and responsive <strong>JavaScript/Vue</strong> interfaces, I believe in ownership, efficiency, and zero telemetry.
+            </p>
+            <p style="font-size: 0.96rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">
+              My homelab powers my family and dev operations with over 10 active microservices—including password vaults, encrypted cloud drives, automated lossless media pipelines, and edge-routed game servers protected by Cloudflare Zero Trust.
+            </p>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="#contact" class="btn-card-action primary">Get In Touch</a>
+              <button class="btn-card-action secondary" onclick="window.PortfolioApp.openResumeModal()">Download Resume (PDF)</button>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="stat-card" style="padding: 22px;">
+              <div class="stat-icon" style="background: rgba(0, 242, 254, 0.1); color: var(--accent-primary);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 4px;">Proxmox Virtualization</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Bare-metal hypervisors, unprivileged LXC containerization, and automated ZFS storage snapshots.</p>
+              </div>
+            </div>
+
+            <div class="stat-card" style="padding: 22px;">
+              <div class="stat-icon" style="background: rgba(127, 0, 255, 0.15); color: #c084fc;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 4px;">Automation & Background Daemons</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Continuous Python daemons, Discord Rich Presence integration, and automated GitHub Actions CI/CD.</p>
+              </div>
+            </div>
+
+            <div class="stat-card" style="padding: 22px;">
+              <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--color-success);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 4px;">Zero-Trust Edge Networking</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Cloudflare Argo Tunnels, AdGuard Home DNS filtering, and hardened TLS encryption with zero open ports.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         ALL PROJECTS GALLERY (Filterable & Searchable)
+         SECTION 3: PROJECTS (Apple Keynote Scroll-Expand + Full Gallery)
          ==================================================================== -->
-    <section class="showcase-section" id="projects" style="padding-top: 40px;">
+    <section class="showcase-section" id="projects">
       <div class="container">
+        <!-- Keynote Highlights Header -->
         <div class="section-header">
-          <span class="section-tag">Complete Catalog</span>
-          <h2 class="section-title">All Systems, Apps & Repositories</h2>
+          <span class="section-tag">Featured Work</span>
+          <h2 class="section-title">Keynote Highlights</h2>
           <p class="section-desc">
-            Explore every active project in the Protutech ecosystem and open-source portfolio with live status, interactive mini screenshots, and architecture specs.
+            Flagship platforms combining hypervisor engineering, real-time RPC daemons, interactive client interfaces, and zero-trust edge routing.
+          </p>
+        </div>
+
+        <!-- Apple Scroll-Expand Bento Cards -->
+        <div class="bento-featured-grid" id="featured-cards-container" style="margin-bottom: 60px;">
+          <!-- Dynamically populated by app.js -->
+        </div>
+
+        <!-- Complete Catalog Header -->
+        <div class="section-header" style="margin-top: 40px;">
+          <span class="section-tag">All Work</span>
+          <h2 class="section-title">Complete Project Catalog</h2>
+          <p class="section-desc">
+            Browse all 20 homelab services, open-source repositories, and developer tools with interactive mini screenshots.
           </p>
         </div>
 
@@ -206,13 +273,13 @@
     </section>
 
     <!-- ====================================================================
-         TECHNICAL COMPETENCIES & ARCHITECTURE
+         SECTION 4: SKILLS & TECHNICAL ARCHITECTURE
          ==================================================================== -->
-    <section class="showcase-section" id="skills" style="padding-top: 20px;">
+    <section class="showcase-section" id="skills">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">Technical Competencies</span>
-          <h2 class="section-title">The Engineering Toolkit</h2>
+          <span class="section-tag">Competencies</span>
+          <h2 class="section-title">Technical Skills & Architecture</h2>
           <p class="section-desc">
             Technologies, platforms, and methodologies battle-tested across production homelabs and development environments.
           </p>
@@ -283,6 +350,52 @@
               <span class="tech-tag">Klipper Firmware</span>
               <span class="tech-tag">Input Shaping</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION 5: CONTACT & RESUME
+         ==================================================================== -->
+    <section class="showcase-section" id="contact" style="padding-bottom: 40px;">
+      <div class="container" style="text-align: center;">
+        <div class="section-header">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Let's Connect</h2>
+          <p class="section-desc">
+            Available for Software Engineering, DevOps, and Systems Architecture opportunities.
+          </p>
+        </div>
+
+        <div style="max-width: 650px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 36px; backdrop-filter: blur(24px);">
+          <div style="display: flex; flex-direction: column; gap: 20px; text-align: left; margin-bottom: 30px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+              <div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">GitHub</div>
+                <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" style="font-weight: 600; color: var(--accent-primary); text-decoration: none;">github.com/IAndrexI</a>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+              <div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Production Portal</div>
+                <a href="https://protutech.vip" target="_blank" rel="noopener noreferrer" style="font-weight: 600; color: var(--accent-primary); text-decoration: none;">protutech.vip</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-card-action primary" onclick="window.PortfolioApp.openResumeModal()" style="padding: 12px 28px; font-size: 15px;">
+              <span>View Full Resume</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </button>
+            <button class="btn-card-action secondary" onclick="navigator.clipboard.writeText('https://github.com/IAndrexI'); alert('GitHub URL copied to clipboard!');" style="padding: 12px 24px; font-size: 15px;">
+              <span>Copy Link</span>
+            </button>
           </div>
         </div>
       </div>
@@ -389,18 +502,20 @@
         <span>Andrew • Protutech Ecosystem</span>
       </div>
       <p class="footer-tagline">
-        Engineered with Apple-inspired design principles, modern vanilla web standards, and high-availability self-hosted systems.
+        Designed with Apple-inspired principles, an animated simplistic starry night sky, and self-hosted on Proxmox VE.
       </p>
       <div class="footer-links-row">
-        <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub (@IAndrexI)</a>
-        <a href="https://iandrexi.github.io/protutechdash/" target="_blank" rel="noopener noreferrer" class="footer-link">Protutech Suite Dashboard</a>
-        <a href="https://proxmox.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">Proxmox VE Portal</a>
-        <a href="https://discopanel.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">DiscoPanel</a>
-        <a href="https://nade.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">CS2 Stratbook</a>
-        <a href="#hero" class="footer-link">Back to Top ↑</a>
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#about" class="footer-link">About</a>
+        <a href="#projects" class="footer-link">Projects</a>
+        <a href="#skills" class="footer-link">Skills</a>
+        <a href="#contact" class="footer-link">Contact</a>
+        <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://proxmox.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">Proxmox</a>
+        <a href="#home" class="footer-link">Back to Top ↑</a>
       </div>
       <div class="footer-copy">
-        &copy; 2026 Andrew. All rights reserved. Self-hosted on Proxmox VE.
+        &copy; 2026 Protutech. All rights reserved. Self-hosted on Proxmox VE 8.4.
       </div>
     </div>
   </footer>
