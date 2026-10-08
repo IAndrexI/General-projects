@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-palette="protutech-obsidian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrew — Systems, Automation & Full-Stack Engineer | Portfolio</title>
+  <meta name="description" content="Portfolio of Andrew (IAndrexI) — Homelab Architect, Systems Engineer, and Full-Stack Developer. Featuring self-hosted Proxmox infrastructure, automation daemons, and open-source applications.">
+  <link rel="icon" type="image/svg+xml" href="assets/protutech-logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Background Lighting -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+
+  <!-- ====================================================================
+       APPLE-STYLE DYNAMIC ISLAND GLASS NAVBAR
+       ==================================================================== -->
+  <div class="navbar-wrapper">
+    <nav class="navbar" aria-label="Main Navigation">
+      <a href="#hero" class="nav-brand">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span>Andrew</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#featured" class="nav-link">Highlights</a></li>
+        <li><a href="#projects" class="nav-link">All Projects</a></li>
+        <li><a href="#skills" class="nav-link">Architecture & Skills</a></li>
+        <li><a href="https://proxmox.protutech.vip" target="_blank" rel="noopener noreferrer" class="nav-link">Proxmox</a></li>
+        <li><a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Palette Switcher -->
+        <select class="palette-select" id="palette-select" title="Switch Theme Palette" aria-label="Switch Theme Palette">
+          <option value="protutech-obsidian">Obsidian Neon</option>
+          <option value="adobe-classic">Adobe Classic</option>
+          <option value="cyber-emerald">Cyber Emerald</option>
+          <option value="sunset-ember">Sunset Ember</option>
+        </select>
+
+        <!-- Light/Dark Toggle -->
+        <button class="btn-icon-pill" id="theme-toggle-btn" title="Toggle Light / Dark Mode" aria-label="Toggle Light / Dark Mode">
+          <span id="theme-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+        </button>
+
+        <!-- Resume Pill CTA -->
+        <button class="btn-pill-primary" onclick="window.PortfolioApp.openResumeModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Resume</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- ====================================================================
+         HERO SECTION (Apple Keynote Style)
+         ==================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          <span>PROTUTECH ECOSYSTEM • 99.98% CLUSTER AVAILABILITY</span>
+        </div>
+
+        <h1 class="hero-title">
+          Engineering at the edge of <span class="gradient-text">Systems & Software.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Hi, I'm <strong>Andrew</strong> (<strong>@IAndrexI</strong>). I design high-availability bare-metal <strong>Proxmox VE</strong> virtualization clusters, real-time background automation daemons, and modern web applications. 100% self-hosted, performance-focused, and open source.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn-hero-primary" onclick="window.PortfolioApp.openResumeModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>View Resume & Credentials</span>
+          </button>
+          <a href="#featured" class="btn-hero-secondary">
+            <span>Explore Keynote Highlights</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </a>
+          <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            <span>GitHub Profile</span>
+          </a>
+        </div>
+
+        <!-- Telemetry Stats -->
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <div>
+              <div class="stat-value">10+</div>
+              <div class="stat-label">Homelab Microservices</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path><path d="M12 12v3"></path></svg>
+            </div>
+            <div>
+              <div class="stat-value">14+</div>
+              <div class="stat-label">GitHub Repositories</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div>
+              <div class="stat-value">99.98%</div>
+              <div class="stat-label">Cluster Availability</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div>
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Self-Hosted Architecture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         KEYNOTE HIGHLIGHTS (Apple Scroll-Expand Bento Cards)
+         ==================================================================== -->
+    <section class="showcase-section" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Keynote Highlights</span>
+          <h2 class="section-title">Designed with intent. Built to perform.</h2>
+          <p class="section-desc">
+            Flagship projects combining hypervisor engineering, real-time RPC daemons, interactive client interfaces, and zero-trust edge routing.
+          </p>
+        </div>
+
+        <div class="bento-featured-grid" id="featured-cards-container">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ALL PROJECTS GALLERY (Filterable & Searchable)
+         ==================================================================== -->
+    <section class="showcase-section" id="projects" style="padding-top: 40px;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Complete Catalog</span>
+          <h2 class="section-title">All Systems, Apps & Repositories</h2>
+          <p class="section-desc">
+            Explore every active project in the Protutech ecosystem and open-source portfolio with live status, interactive mini screenshots, and architecture specs.
+          </p>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="filter-search-bar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" class="search-input" id="project-search" placeholder="Search by name, tech (e.g. Proxmox, Python, Vue, FLAC), or domain...">
+            <span class="search-shortcut-pill">/ or Ctrl+K</span>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div class="category-pills-row" id="category-pills">
+              <button class="category-pill active" data-category="All">All Projects</button>
+              <button class="category-pill" data-category="Proxmox & Homelab">Proxmox & Homelab</button>
+              <button class="category-pill" data-category="Open Source & GitHub">Open Source & GitHub</button>
+              <button class="category-pill" data-category="Automation & Python">Automation & Python</button>
+              <button class="category-pill" data-category="Full Stack & Web">Full Stack & Web</button>
+              <button class="category-pill" data-category="Game Tech">Game Tech & Tools</button>
+            </div>
+            <span class="feature-pill" id="project-count-badge" style="background: var(--bg-pill); color: var(--text-muted);">20 Projects Shown</span>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-gallery-grid" id="projects-grid">
+          <!-- Dynamically populated by app.js with mini screenshots -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TECHNICAL COMPETENCIES & ARCHITECTURE
+         ==================================================================== -->
+    <section class="showcase-section" id="skills" style="padding-top: 20px;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Technical Competencies</span>
+          <h2 class="section-title">The Engineering Toolkit</h2>
+          <p class="section-desc">
+            Technologies, platforms, and methodologies battle-tested across production homelabs and development environments.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+          <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
+              <h4 style="font-size: 1.1rem; font-weight: 700;">Virtualization & Homelab</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Bare-metal cluster hypervisors, container isolation, snapshot storage architectures.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Proxmox VE 8.4</span>
+              <span class="tech-tag">LXC Containers</span>
+              <span class="tech-tag">KVM</span>
+              <span class="tech-tag">ZFS Storage</span>
+              <span class="tech-tag">Portainer</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">GPU Passthrough</span>
+            </div>
+          </div>
+
+          <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+              <h4 style="font-size: 1.1rem; font-weight: 700;">Security & Networking</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Zero-trust edge tunnels, automated DNS filtering, end-to-end encrypted vaults.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Cloudflare Argo Tunnels</span>
+              <span class="tech-tag">AdGuard Home</span>
+              <span class="tech-tag">Vaultwarden (Bitwarden)</span>
+              <span class="tech-tag">Nginx Reverse Proxy</span>
+              <span class="tech-tag">TLS / Let's Encrypt</span>
+              <span class="tech-tag">SPF / DKIM / DMARC</span>
+            </div>
+          </div>
+
+          <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+              <h4 style="font-size: 1.1rem; font-weight: 700;">Software Engineering</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Interactive full-stack applications, modern component architecture, responsive systems.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">JavaScript (ESNext)</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Python 3</span>
+              <span class="tech-tag">Vue.js</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">HTML5 / Modern CSS</span>
+              <span class="tech-tag">WebSockets</span>
+            </div>
+          </div>
+
+          <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+              <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+              <h4 style="font-size: 1.1rem; font-weight: 700;">Automation & Hardware</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Background RPC services, firmware tuning, CoreXY 3D printers, CI/CD pipelines.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">Discord RPC / Bots</span>
+              <span class="tech-tag">GitHub Actions CI/CD</span>
+              <span class="tech-tag">PowerShell / Bash</span>
+              <span class="tech-tag">Voron 2.4 (350mm)</span>
+              <span class="tech-tag">Klipper Firmware</span>
+              <span class="tech-tag">Input Shaping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       APPLE-STYLE FULL DETAIL MODAL (Card Expansion)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="project-detail-modal" role="dialog" aria-modal="true" aria-label="Project Details">
+    <div class="apple-modal">
+      <button class="modal-close-btn" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="modal-detail-body">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       RESUME MODAL (Ready for Print & PDF)
+       ==================================================================== -->
+  <div class="modal-backdrop" id="resume-modal" role="dialog" aria-modal="true" aria-label="Resume & Credentials">
+    <div class="apple-modal resume-modal-content">
+      <button class="modal-close-btn" aria-label="Close resume">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="resume-header-block">
+        <h2 class="resume-name">Andrew</h2>
+        <div class="resume-role-tag">Software Engineer & Systems Architect</div>
+        <div class="resume-contact-row">
+          <span>GitHub: <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" style="color:var(--accent-primary);">github.com/IAndrexI</a></span>
+          <span>Portal: <a href="https://protutech.vip" target="_blank" rel="noopener noreferrer" style="color:var(--accent-primary);">protutech.vip</a></span>
+          <span>Location: United States</span>
+          <span>Status: Open to Engineering Opportunities</span>
+        </div>
+      </div>
+
+      <div class="resume-skill-category">
+        <h4 class="resume-skill-cat-title">Executive Summary</h4>
+        <p style="font-size: 0.94rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+          Software and Systems Engineer with a demonstrated track record of designing, deploying, and maintaining resilient self-hosted infrastructure and full-stack software. Proven experience orchestrating bare-metal Proxmox clusters hosting 10+ production microservices with 99.98% uptime, developing automated Python and Discord RPC daemons, and shipping intuitive, responsive client interfaces.
+        </p>
+      </div>
+
+      <div class="resume-skill-category">
+        <h4 class="resume-skill-cat-title">Selected Production Highlights & Accomplishments</h4>
+        <ul class="resume-bullets-list" style="margin-bottom: 20px;">
+          <li class="resume-bullet-item">
+            <strong>Protutech Proxmox VE Cluster:</strong> Designed bare-metal virtualization infrastructure supporting 10+ containerized workloads (LXC) with zero-overhead ZFS storage, GPU passthrough, and zero-trust Cloudflare Argo Tunnels.
+          </li>
+          <li class="resume-bullet-item">
+            <strong>Protutech Suite Dashboard (ProtutechDash):</strong> Engineered Adobe Suite-inspired unified launcher with Periodic Table mode, cross-tab CSS variable theme engine, and native desktop URI dispatcher daemon.
+          </li>
+          <li class="resume-bullet-item">
+            <strong>CS2 Tactical Stratbook & Nade Lineups:</strong> Built interactive 2D canvas whiteboard with mathematical trajectory modeling and mobile companion synchronization deployed on Proxmox LXC.
+          </li>
+          <li class="resume-bullet-item">
+            <strong>proxDiscord & RPC Daemon:</strong> Developed real-time Python service polling Proxmox cluster REST APIs to broadcast live hypervisor diagnostics to Discord Rich Presence with administrative web controls.
+          </li>
+          <li class="resume-bullet-item">
+            <strong>DNSfilters & CI/CD Pipeline:</strong> Authored automated GitHub Actions pipeline ingesting, deduplicating, and validating 350,000+ domain filters for zero-latency network telemetry prevention.
+          </li>
+          <li class="resume-bullet-item">
+            <strong>Voron 2.4 CoreXY 3D Printer:</strong> Electro-mechanical fabrication and firmware tuning with ADXL345 accelerometer resonance compensation (Input Shaping) for high-speed precision manufacturing.
+          </li>
+        </ul>
+      </div>
+
+      <div class="resume-skill-category">
+        <h4 class="resume-skill-cat-title">Technical Skills Matrix</h4>
+        <div style="font-size: 0.88rem; line-height: 1.8; color: var(--text-secondary);">
+          <div><strong style="color:var(--text-primary);">Languages:</strong> Python, JavaScript (ES6+), TypeScript, PowerShell, Bash, SQL, HTML5/CSS3</div>
+          <div><strong style="color:var(--text-primary);">Systems & Cloud:</strong> Proxmox VE 8.4, Debian Linux, LXC Containers, Docker, ZFS Storage, Cloudflare Zero Trust, Nginx</div>
+          <div><strong style="color:var(--text-primary);">Frameworks & Libraries:</strong> Vue.js, Node.js, Express, Discord API/IPC, Canvas API, PWA / Service Workers</div>
+          <div><strong style="color:var(--text-primary);">Security & Protocols:</strong> WebAuthn / 2FA, Vaultwarden, DKIM/SPF/DMARC, REST APIs, WebSockets, DNS Filtering</div>
+        </div>
+      </div>
+
+      <div class="modal-cta-footer" style="margin-top: 24px;">
+        <button class="btn-card-action primary" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          <span>Print / Save as PDF</span>
+        </button>
+        <button class="btn-card-action secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Portfolio link copied to clipboard!');">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>Copy Portfolio Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <div class="nav-logo-icon" style="width: 24px; height: 24px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+        </div>
+        <span>Andrew • Protutech Ecosystem</span>
+      </div>
+      <p class="footer-tagline">
+        Engineered with Apple-inspired design principles, modern vanilla web standards, and high-availability self-hosted systems.
+      </p>
+      <div class="footer-links-row">
+        <a href="https://github.com/IAndrexI" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub (@IAndrexI)</a>
+        <a href="https://iandrexi.github.io/protutechdash/" target="_blank" rel="noopener noreferrer" class="footer-link">Protutech Suite Dashboard</a>
+        <a href="https://proxmox.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">Proxmox VE Portal</a>
+        <a href="https://discopanel.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">DiscoPanel</a>
+        <a href="https://nade.protutech.vip" target="_blank" rel="noopener noreferrer" class="footer-link">CS2 Stratbook</a>
+        <a href="#hero" class="footer-link">Back to Top ↑</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Andrew. All rights reserved. Self-hosted on Proxmox VE.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="projects-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
