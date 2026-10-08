@@ -1,0 +1,9 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio-web
+    restart: always
+    ports:
+      - "8085:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
