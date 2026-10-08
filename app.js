@@ -909,8 +909,14 @@
       });
     }
 
-    // 7. Keyboard shortcuts
+    // 7. Keyboard shortcuts & Download/Print Interception
     window.addEventListener('keydown', (e) => {
+      // Intercept Save (Ctrl+S / Cmd+S) and Print (Ctrl+P / Cmd+P)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) {
+        e.preventDefault();
+        return false;
+      }
+
       if ((e.key === '/' || (e.ctrlKey && e.key === 'k')) && document.activeElement !== elements.searchInput) {
         e.preventDefault();
         if (elements.searchInput) {

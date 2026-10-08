@@ -1682,21 +1682,16 @@ section {
   }
 }
 
-/* Print Styles for Resume */
+/* Prevent Page Download / Printing */
 @media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-
-  #starry-canvas, .navbar-wrapper, .ambient-bg, .footer, .hero-cta-group, .filter-search-bar, .modal-close-btn {
+  html, body {
     display: none !important;
+    visibility: hidden !important;
   }
+}
 
-  .apple-modal {
-    box-shadow: none !important;
-    border: none !important;
-    max-height: none !important;
-    padding: 0 !important;
-  }
+/* UI Asset Protection */
+img, svg, canvas {
+  -webkit-user-drag: none;
+  user-select: none;
 }

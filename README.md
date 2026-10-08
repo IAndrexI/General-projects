@@ -29,9 +29,9 @@ Designed specifically for **resume presentation**, recruiter walkthroughs, and e
 4. **Complete Project Catalog (20 Projects):**
    - **Proxmox & Homelab (9 Services):** Proxmox VE 9.2.11, Pelican Panel, ProtutechDash, Seafile Cloud, Vaultwarden, Homebox, Direct Files, Mail Gateway, Navidrome & slskd.
    - **Open Source & GitHub (11 Projects):** proxDiscord, CS2Nades, DNSfilters, aiVault, windowsDesktopDisableBind, Voron2.4, dropsClaim, SC audio server, discordapi, habitica, General-projects.
-5. **Resume Ready & Printable:**
+5. **Resume & Career View:**
    - Built-in **Resume View** with technical competency matrix, quantifiable impact metrics, and clean typography.
-   - Includes **Print / Save as PDF** styling (`@media print`) that formats the entire resume into a clean paper document for recruiters.
+   - Protected layout: page download/print buttons hidden, and browser save/print shortcuts intercepted.
 6. **Real-time Filter & Search:**
    - Filter by ecosystem (Proxmox, GitHub, Full Stack, Automation, Game Tech).
    - Global search with keyboard shortcuts (`/` or `Ctrl+K`).
@@ -42,37 +42,43 @@ Designed specifically for **resume presentation**, recruiter walkthroughs, and e
 
 You can open `index.html` directly in any modern browser, or run a local lightweight web server:
 
-### Option A: Python 3 (Recommended)
 ```bash
 python -m http.server 3000
 ```
 Then navigate to: `http://localhost:3000`
 
-### Option B: Node.js (npx serve)
+---
+
+## 🖥️ Ultra-Light Self-Hosting on Proxmox VE 9.2.11
+
+The site has a memory footprint of **only ~10-15 MB RAM** with **0% idle CPU**.
+
+### Method 1: 1-Command Automated LXC Creation (Proxmox VE Node Shell)
+Open your Proxmox VE Web UI -> Click your node (`pve`) -> **Shell**, then run:
 ```bash
-npx serve .
+curl -sSL https://raw.githubusercontent.com/IAndrexI/General-projects/main/create-proxmox-lxc.sh | bash
+```
+*This downloads Alpine Linux, provisions an unprivileged container (64MB RAM, 512MB disk), installs Nginx, pulls the repository, and starts it on boot automatically.*
+
+### Method 2: Inside Any Existing LXC Container (Alpine / Debian / Ubuntu)
+Inside an existing container's terminal:
+```bash
+curl -sSL https://raw.githubusercontent.com/IAndrexI/General-projects/main/deploy-proxmox-lxc.sh | sh
+```
+
+### Method 3: Docker / Portainer Container
+```bash
+docker compose up -d
 ```
 
 ---
 
-## 🌐 Deployment Options
+## ☁️ Cloudflare Tunnel Setup
 
-### 1. GitHub Pages (e.g. `https://iandrexi.github.io/portfolio/`)
-1. Create a repository on GitHub (e.g. `portfolio` or `iandrexi.github.io`).
-2. Push this folder:
-   ```bash
-   git remote add origin https://github.com/IAndrexI/portfolio.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. In GitHub Settings -> Pages, select branch `main` and root `/`.
-
-### 2. Proxmox VE LXC Container
-Deploy into an unprivileged Nginx LXC container or Portainer static container:
-```bash
-cp -r . /var/www/portfolio/
-```
-Route via your Cloudflare Tunnel to your custom domain.
+To make the site accessible online 24/7 without opening router ports:
+1. In Cloudflare Zero Trust Dashboard -> **Networks** -> **Tunnels**.
+2. Add a Public Hostname (e.g. `portfolio.yourdomain.com`).
+3. Set Service type: `HTTP` and URL: `http://<CONTAINER_IP>:80` (or `http://localhost:8085` if using Docker).
 
 ---
 

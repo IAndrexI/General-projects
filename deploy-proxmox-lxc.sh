@@ -1,25 +1,46 @@
 #!/bin/sh
 # ==============================================================================
-# Protutech Portfolio - Ultra-Lightweight Alpine LXC Setup Script
-# Run this inside your Proxmox PVE Shell or inside an Alpine LXC Container
-# Footprint: ~15 MB RAM, 0% CPU at idle, auto-starts on boot
+# Protutech Portfolio - Ultra-Lightweight Inside-LXC Deployment Script
+# Run this inside ANY Proxmox LXC Container (Alpine, Debian, or Ubuntu)
+# Memory Footprint: ~10-15 MB RAM total | 0% idle CPU
 # ==============================================================================
 
 set -e
 
-echo "=== [1/4] Installing Nginx & Git ==="
-apk update
-apk add --no-cache nginx git
+echo "=== [1/4] Detecting Package Manager & Installing Nginx + Git ==="
+if command -v apk >/dev/null 2>&1; then
+    # Alpine Linux (Fastest & Lightest)
+    apk update
+    apk add --no-cache nginx git
+    INIT_SYSTEM="openrc"
+    NGINX_CONF_DIR="/etc/nginx/http.d"
+elif command -v apt-get >/dev/null 2>&1; then
+    # Debian / Ubuntu Linux
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y --no-install-recommends nginx git ca-certificates
+    INIT_SYSTEM="systemd"
+    NGINX_CONF_DIR="/etc/nginx/sites-available"
+else
+    echo "Unsupported package manager. Please run on Alpine, Debian, or Ubuntu."
+    exit 1
+fi
 
-echo "=== [2/4] Setting up Portfolio Directory ==="
+echo "=== [2/4] Setting Up Web Directory ==="
 mkdir -p /var/www/portfolio
 mkdir -p /run/nginx
 
-# If running standalone, clone or copy files here:
-# git clone https://github.com/IAndrexI/portfolio.git /var/www/portfolio
+# Clone from GitHub if not already in directory
+if [ ! -f "/var/www/portfolio/index.html" ]; then
+    echo "Cloning latest portfolio from GitHub..."
+    git clone https://github.com/IAndrexI/General-projects.git /tmp/portfolio-repo
+    cp -r /tmp/portfolio-repo/* /var/www/portfolio/
+    rm -rf /tmp/portfolio-repo
+fi
 
 echo "=== [3/4] Configuring High-Performance Nginx ==="
-cat << 'EOF' > /etc/nginx/http.d/default.conf
+if [ "$INIT_SYSTEM" = "openrc" ]; then
+    cat << 'EOF' > /etc/nginx/http.d/default.conf
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -28,28 +49,59 @@ server {
     root /var/www/portfolio;
     index index.html;
 
-    # Gzip compression for fast loading
     gzip on;
     gzip_types text/plain text/css application/javascript application/json image/svg+xml;
     gzip_min_length 256;
 
-    # Cache static assets
     location ~* \.(css|js|svg|png|jpg|ico)$ {
         expires 7d;
         add_header Cache-Control "public, no-transform";
     }
 
-    # SPA / clean routing fallback
     location / {
         try_files $uri $uri/ /index.html;
     }
 }
 EOF
+else
+    cat << 'EOF' > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
 
-echo "=== [4/4] Enabling Auto-start & Starting Nginx ==="
-rc-update add nginx default
-rc-service nginx restart
+    root /var/www/portfolio;
+    index index.html;
 
-echo "=== Deployment Complete! ==="
-echo "Local IP: $(ip -4 addr show eth0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' || hostname -I)"
-echo "Test locally with: curl http://localhost"
+    gzip on;
+    gzip_types text/plain text/css application/javascript application/json image/svg+xml;
+    gzip_min_length 256;
+
+    location ~* \.(css|js|svg|png|jpg|ico)$ {
+        expires 7d;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+EOF
+fi
+
+echo "=== [4/4] Starting Nginx Service & Enabling on Boot ==="
+if [ "$INIT_SYSTEM" = "openrc" ]; then
+    rc-update add nginx default 2>/dev/null || true
+    rc-service nginx restart
+else
+    systemctl enable nginx 2>/dev/null || true
+    systemctl restart nginx
+fi
+
+IP_ADDR=$(ip -4 addr show eth0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' || hostname -I 2>/dev/null | awk '{print $1}' || echo "localhost")
+
+echo "=========================================================="
+echo "  🎉 Protutech Portfolio Successfully Deployed!"
+echo "  Access Locally : http://$IP_ADDR"
+echo "  RAM Footprint  : ~10-15 MB"
+echo "=========================================================="
