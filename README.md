@@ -67,12 +67,12 @@ npx serve .
    ```
 3. In GitHub Settings -> Pages, select branch `main` and root `/`.
 
-### 2. Proxmox VE LXC Container (`portfolio.protutech.vip`)
+### 2. Proxmox VE LXC Container
 Deploy into an unprivileged Nginx LXC container or Portainer static container:
 ```bash
 cp -r . /var/www/portfolio/
 ```
-Route via your Cloudflare Tunnel to `portfolio.protutech.vip`.
+Route via your Cloudflare Tunnel to your custom domain.
 
 ---
 
