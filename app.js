@@ -668,6 +668,11 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </span>
           <div class="project-card-links">
+            ${project.internalUrl ? `
+              <a href="${project.internalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-icon-link" title="Launch Original Prototype" onclick="event.stopPropagation()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            ` : ''}
 
             ${project.githubUrl ? `
               <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-icon-link" title="View GitHub Code" onclick="event.stopPropagation()">
@@ -745,6 +750,12 @@
       </div>
 
       <div class="modal-cta-footer">
+        ${project.internalUrl ? `
+          <a href="${project.internalUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-action primary" style="padding: 10px 22px; font-size: 14px;">
+            <span>Launch Original Design</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        ` : ''}
 
         ${project.githubUrl ? `
           <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-action secondary" style="padding: 10px 20px; font-size: 14px;">

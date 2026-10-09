@@ -1,0 +1,26 @@
+# ==============================================================================
+# Caddyfile for Protutech Portfolio (portfolio.protutech.vip)
+# Configured for Cloudflare Tunnel + Local LAN access on Port 80
+# ==============================================================================
+
+:80, portfolio.protutech.vip:80 {
+    encode gzip
+
+    # Route /original/ or /practice/ to the archived foundational design
+    handle_path /original* {
+        root * /var/www/portfolio/archive/practice-page
+        file_server
+    }
+
+    handle_path /practice* {
+        root * /var/www/portfolio/archive/practice-page
+        file_server
+    }
+
+    # Main Apple-Style Starry Portfolio
+    handle {
+        root * /var/www/portfolio
+        try_files {path} /index.html
+        file_server
+    }
+}

@@ -437,6 +437,7 @@ window.PORTFOLIO_DATA = {
       badge: "Frontend Archive",
       date: "2023 - 2024",
       liveUrl: null,
+      internalUrl: "/original/",
       githubUrl: "https://github.com/IAndrexI/General-projects",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Flexbox & Grid"],
       shortDesc: "Foundational web development archive showcasing early responsive design layouts, flexbox grids, and modal interactions preserved alongside current production systems.",
